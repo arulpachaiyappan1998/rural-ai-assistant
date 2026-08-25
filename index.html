@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural AI Assistant - காட்டு & கிராமப்புற ஏஐ உதவியாளர்</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; max-width: 600px; margin: auto; }
+        h2 { color: #1b5e20; text-align: center; }
+        .chat-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-height: 200px; margin-bottom: 15px; }
+        textarea { width: 100%; height: 80px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: #2e7d32; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 5px; }
+        .badge { background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>🌲 Rural AI Assistant</h2>
+    <div style="text-align: center;"><span class="badge">📡 Low-Bandwidth & Voice Enabled</span></div>
+
+    <div class="chat-box" id="responseBox">
+        <i>இங்கே உங்க கேள்வியைக் கேளுங்க மச்சி (எ.கா: பாம்பு கடிச்சிருச்சு என்ன பண்ணனும்?)...</i>
+    </div>
+
+    <textarea id="userInput" placeholder="உங்க கேள்வியை இங்கே டைப் பண்ணுங்க..."></textarea>
+    <button onclick="askAI()">கேள்வி கேள் / Ask AI</button>
+
+    <script>
+        // Web Speech API - Tamil Text to Speech (Voice Output)
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ta-IN'; // Tamil Language
+                utterance.rate = 0.9; // Natural speed
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        async function askAI() {
+            const input = document.getElementById('userInput').value;
+            const box = document.getElementById('responseBox');
+            
+            if(!input) return;
+
+            box.innerHTML = "<b>யோசிக்குது... (Thinking)</b>";
+
+            // Gemini API Call Demo Logic
+            const responseText = "பயப்படாதீங்க மச்சி, முதல்ல அமைதியா இருங்க! நெட்வொர்க் கம்மியா இருந்தாலும் உங்க கேள்வி சேவ் ஆகிடுச்சு. உடனே 112 டயல் பண்ணுங்க. கடிச்ச இடத்தை அசையாம வைங்க!";
+            
+            box.innerHTML = "<b>AI பதில்:</b><br>" + responseText;
+            
+            // Speak response automatically
+            speakText(responseText);
+        }
+    </script>
+
+</body>
+</html>
